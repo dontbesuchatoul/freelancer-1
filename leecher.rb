@@ -39,7 +39,12 @@ while ! the_end
     province = address.pop
     city = address.pop
     street = address.join(',')
-    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(',')};".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + "\n"
+
+    # relationship
+    r_values = item.css(".stats > div")[0].css('strong')
+    r_titles = item.css(".stats > div")[1].css('strong')
+
+    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(',')};".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + ",\n"
   end
 
   i += 10
