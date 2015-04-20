@@ -51,7 +51,7 @@ while ! the_end
     relationship = []
     r_values.each_with_index {|v, k| relationship << "#{r_titles[k]}: #{v}"}
 
-    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(', ')};#{relationship.join(', ')}".gsub('"', '""').split(";").map {|i| "\"#{i.empty? ? " " : i}\"" }.join(',') + "\n"
+    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(', ')};#{relationship.join(', ')}".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + (relationship.any? ? "" : ",") + "\n"
   end
 
   i += 10
