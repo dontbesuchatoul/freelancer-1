@@ -5,7 +5,7 @@ require 'nokogiri'
 
 i = 0
 page_size = 10
-puts "CompanyName,Phone,Email,Website,Street,City,Province,Postal Code,Country,Badges,CitrixRelationship,"
+puts "CompanyName,Phone,Email,Website,Street,City,Province,Postal Code,Country,Badges,CitrixRelationship"
 
 the_end = false
 while ! the_end
@@ -39,7 +39,7 @@ while ! the_end
     province = address.pop
     city = address.pop
     street = address.join(',')
-    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(',')};\n".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',')
+    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(',')};".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + "\n"
   end
 
   i += 10
