@@ -41,10 +41,17 @@ while ! the_end
     street = address.join(',')
 
     # relationship
-    r_values = item.css(".stats > div")[0].css('strong')
-    r_titles = item.css(".stats > div")[1].css('strong')
+    r_values = item.css(".stats > div")[0].css('strong').map { |e| e.text.strip }
+    r_titles = []
+    item.css(".stats > div")[1].children.each do |e|
+      next if e.name == "br"
+      text = e.text.strip
+      r_titles << text unless text.empty?
+    end
+    relationship = []
+    r_values.each_with_index {|v, k| relationship << "#{r_titles[k]}: #{v}"}
 
-    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(',')};".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + ",\n"
+    puts "#{companyName};#{phone};#{email};#{website};#{street};#{city};#{province};#{postalCode};#{country};#{badges.join(', ')};#{relationship.join(', ')}".gsub('"', '""').split(";").map {|i| "\"#{i}\"" }.join(',') + "\n"
   end
 
   i += 10
